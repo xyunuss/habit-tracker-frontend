@@ -2,23 +2,30 @@
   <div>
     <h2>My Habits</h2>
     <ul>
-      <HabitItem v-for="habit in habits" :key="habit.id" :habit="habit" />
+      <HabitItem
+        v-for="habit in habits"
+        :key="habit.id"
+        :habit="habit"
+      />
     </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import HabitItem from './HabitItem.vue'
+import { ref, onMounted } from "vue";
+import HabitItem from "./HabitItem.vue";
 
-const habits = ref([])
+const habits = ref([]);
 
-onMounted(() => {
-  // Beispiel-Daten – später ersetzt durch Daten vom Backend
-  habits.value = [
-    { id: 1, name: 'Drink Water' },
-    { id: 2, name: 'Go for a walk' },
-    { id: 3, name: 'Sleep early' },
-  ]
-})
+onMounted(async () => {
+  try {
+    const response = await fetch(
+      "https://habit-tracker-backend-v21g.onrender.com/api/habits"
+    );
+    const data = await response.json();
+    habits.value = data;
+  } catch (error) {
+    console.error("Error fetching habits:", error);
+  }
+});
 </script>
