@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>My Habits</h1>
     <HabitList />
   </div>
 </template>
