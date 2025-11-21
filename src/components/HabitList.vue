@@ -17,15 +17,5 @@ import HabitItem from "./HabitItem.vue";
 
 const habits = ref([]);
 
-onMounted(async () => {
-  try {
-    const response = await fetch(
-      "https://habit-tracker-backend-v21g.onrender.com/api/habits"
-    );
-    const data = await response.json();
-    habits.value = data;
-  } catch (error) {
-    console.error("Error fetching habits:", error);
-  }
-});
-</script>
+
+
