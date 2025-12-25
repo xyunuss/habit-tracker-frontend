@@ -1,4 +1,4 @@
-const API_BASE = 'https://habit-tracker-backend-v21g.onrender.com/api'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://habit-tracker-backend-v21g.onrender.com/api'
 
 // Helper for API requests
 async function request(endpoint, options = {}) {

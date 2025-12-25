@@ -41,11 +41,17 @@ cd habit-tracker-frontend
 # Dependencies installieren
 npm install
 
+# Environment Variable setzen (optional, für lokale Entwicklung)
+# Kopiere .env.example zu .env und passe die URL an
+cp .env.example .env
+
 # Entwicklungsserver starten
 npm run dev
 ```
 
 Die App ist dann unter `http://localhost:5173` erreichbar.
+
+**Hinweis:** Die API URL kann über die Environment Variable `VITE_API_URL` konfiguriert werden. Standardmäßig wird die Production-URL verwendet.
 
 ## 📦 Verfügbare Scripts
 
@@ -157,6 +163,9 @@ npm run test:unit -- --watch
 Das Frontend ist auf Render.com deployed:
 - **URL:** https://habit-tracker-frontend-4y37.onrender.com
 - **Auto-Deploy:** Bei Push auf main Branch
+
+**Environment Variable auf Render.com:**
+- `VITE_API_URL` = `https://habit-tracker-backend-v21g.onrender.com/api`
 
 ## 🔗 Backend
 
