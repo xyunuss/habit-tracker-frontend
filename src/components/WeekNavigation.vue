@@ -43,7 +43,7 @@
 import { computed, ref } from 'vue'
 import { dateUtils } from '../services/api.js'
 
-const props = defineProps({
+defineProps({
   currentDate: {
     type: String,
     required: true

@@ -19,7 +19,7 @@ async function request(endpoint, options = {}) {
       try {
         const errorData = await response.json()
         errorMessage = errorData.message || errorData.error || errorMessage
-      } catch (e) {
+      } catch {
         const errorText = await response.text()
         if (errorText) {
           errorMessage = errorText
