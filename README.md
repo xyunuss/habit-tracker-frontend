@@ -12,17 +12,20 @@ Der Habit Tracker ist eine Web-Anwendung zum Verfolgen von täglichen Gewohnheit
 
 - **Gewohnheiten verwalten:** Erstellen, Bearbeiten und Löschen von Habits
 - **Tägliches Abhaken:** Ein-Klick Check-in für jede Gewohnheit
-- **Fortschrittsübersicht:** Heatmap-Darstellung der letzten Wochen
+- **Fortschrittsübersicht:** GitHub-Style Heatmap-Darstellung
 - **Streak-Tracking:** Anzeige der aktuellen und längsten Serie
 - **Statistiken:** Prozentuale Erfolgsquote und Monatsübersicht
+- **Motivationszitate:** Tägliches Zitat von externer API
 - **Responsives Design:** Optimiert für Desktop und Tablet
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Vue.js 3 (Composition API)
-- **Build Tool:** Vite
-- **Testing:** Vitest + Vue Test Utils
-- **Styling:** Custom CSS mit CSS Variables
+- **Framework:** Vue.js 3.5 (Composition API)
+- **Build Tool:** Vite 7.x
+- **Testing:** Vitest 3.2 + Vue Test Utils
+- **Styling:** Custom CSS mit CSS Variables (Design System)
+- **Linting:** ESLint 9.x + Prettier
+- **CI/CD:** GitHub Actions
 - **Deployment:** Render.com
 
 ## 🚀 Schnellstart
@@ -42,7 +45,6 @@ cd habit-tracker-frontend
 npm install
 
 # Environment Variable setzen (optional, für lokale Entwicklung)
-# Kopiere .env.example zu .env und passe die URL an
 cp .env.example .env
 
 # Entwicklungsserver starten
@@ -56,20 +58,12 @@ Die App ist dann unter `http://localhost:5173` erreichbar.
 ## 📦 Verfügbare Scripts
 
 ```bash
-# Entwicklungsserver starten
-npm run dev
-
-# Production Build erstellen
-npm run build
-
-# Build-Vorschau anzeigen
-npm run preview
-
-# Unit Tests ausführen
-npm run test:unit
-
-# Linter ausführen
-npm run lint
+npm run dev        # Entwicklungsserver starten
+npm run build      # Production Build erstellen
+npm run preview    # Build-Vorschau anzeigen
+npm run test:unit  # Unit Tests ausführen
+npm run lint       # Linter ausführen
+npm run format     # Code formatieren
 ```
 
 ## 📁 Projektstruktur
@@ -79,7 +73,7 @@ src/
 ├── App.vue                     # Hauptkomponente
 ├── main.js                     # Entry Point
 ├── assets/
-│   ├── base.css                # CSS Reset & Variables
+│   ├── base.css                # CSS Design System (Variablen, Reset)
 │   └── main.css                # Globale Styles
 ├── components/
 │   ├── ConfirmDialog.vue       # Bestätigungsdialog
@@ -87,10 +81,11 @@ src/
 │   ├── HabitDetail.vue         # Detailansicht eines Habits
 │   ├── HabitListItem.vue       # Habit in der Sidebar
 │   ├── HabitModal.vue          # Erstellen/Bearbeiten Dialog
+│   ├── QuoteCard.vue           # Motivationszitat des Tages
 │   ├── WeekNavigation.vue      # Wochennavigation
-│   └── __tests__/              # Komponenten-Tests
+│   └── __tests__/              # Komponenten-Tests (43 Tests)
 └── services/
-    └── api.js                  # API Client & Utilities
+    └── api.js                  # API Client, Date Utils, Stats Utils
 ```
 
 ## 🎨 Komponenten
@@ -118,6 +113,11 @@ Dialog zum Erstellen/Bearbeiten:
 - Typ (Täglich / X-mal pro Woche)
 - Icon und Farbe auswählen
 
+### QuoteCard
+Zeigt ein motivierendes Tageszitat:
+- Integration mit DummyJSON Quotes API
+- Automatisches Laden bei App-Start
+
 ## 🎯 Benutzung
 
 ### Habit erstellen
@@ -141,7 +141,15 @@ Dialog zum Erstellen/Bearbeiten:
 
 ## 🧪 Tests
 
-Das Projekt enthält Unit-Tests für alle Hauptkomponenten:
+Das Projekt enthält **43 Unit-Tests** für alle Hauptkomponenten:
+
+| Komponente | Tests |
+|------------|-------|
+| HabitListItem | 10 |
+| HabitModal | 9 |
+| WeekNavigation | 8 |
+| HabitCard | 9 |
+| ConfirmDialog | 7 |
 
 ```bash
 # Tests ausführen
@@ -149,14 +157,17 @@ npm run test:unit
 
 # Tests im Watch-Modus
 npm run test:unit -- --watch
+
+# Tests mit Coverage
+npm run test:unit -- --coverage
 ```
 
-**Getestete Komponenten:**
-- HabitListItem
-- HabitCard
-- HabitModal
-- ConfirmDialog
-- WeekNavigation
+## 🔄 CI/CD
+
+GitHub Actions führt bei jedem Push/PR automatisch aus:
+- ESLint (Code-Qualität)
+- Unit Tests mit Vitest
+- Production Build
 
 ## 🌐 Deployment
 
@@ -164,7 +175,7 @@ Das Frontend ist auf Render.com deployed:
 - **URL:** https://habit-tracker-frontend-4y37.onrender.com
 - **Auto-Deploy:** Bei Push auf main Branch
 
-**Environment Variable auf Render.com:**
+**Environment Variables auf Render.com:**
 - `VITE_API_URL` = `https://habit-tracker-backend-v21g.onrender.com/api`
 
 ## 🔗 Backend
@@ -172,26 +183,6 @@ Das Frontend ist auf Render.com deployed:
 Das Frontend kommuniziert mit dem Spring Boot Backend:
 - **Repository:** https://github.com/xyunuss/habit-tracker-backend
 - **API:** https://habit-tracker-backend-v21g.onrender.com/api
-
-## 📸 Screenshots
-
-### Übersicht
-Die Hauptansicht zeigt alle Habits mit Heatmaps:
-- Links: Habit-Liste mit Quick-Check
-- Rechts: Übersicht aller Habit-Karten
-
-### Detailansicht
-Klick auf einen Habit öffnet die Detailansicht:
-- Statistiken (Streak, Erfolgsquote)
-- Monatskalender
-- Wöchentlicher Fortschritt
-
-### Habit erstellen
-Das Modal zum Erstellen bietet:
-- Namenseingabe
-- Typ-Auswahl (Täglich/Wöchentlich)
-- Icon-Auswahl (Emojis)
-- Farbauswahl
 
 ## 📝 Lizenz
 
