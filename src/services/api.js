@@ -1,36 +1,27 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'https://habit-tracker-backend-v21g.onrender.com/api'
 
-// ZenQuotes API for motivational quotes
+// DummyJSON Quotes API for motivational quotes
+// Returns different quote on each request
 export const quoteApi = {
   getRandom: async () => {
-    // Try multiple CORS proxies as fallbacks
-    const corsProxies = [
-      'https://corsproxy.io/?',
-      'https://api.codetabs.com/v1/proxy?quest='
-    ]
-
-    for (const proxy of corsProxies) {
-      try {
-        const response = await fetch(proxy + encodeURIComponent('https://zenquotes.io/api/random'))
-        if (!response.ok) {
-          continue // Try next proxy
-        }
-        const data = await response.json()
-        // ZenQuotes returns array with single quote object: [{q: "quote", a: "author"}]
-        if (data && data.length > 0 && data[0].q) {
-          return {
-            text: data[0].q,
-            author: data[0].a
-          }
-        }
-      } catch (error) {
-        console.warn(`Quote proxy ${proxy} failed:`, error.message)
-        continue // Try next proxy
+    try {
+      const response = await fetch('https://dummyjson.com/quotes/random')
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
       }
+      const data = await response.json()
+      // DummyJSON returns: { id, quote: "text", author: "name" }
+      if (data && data.quote) {
+        return {
+          text: data.quote,
+          author: data.author
+        }
+      }
+      throw new Error('Invalid quote data')
+    } catch (error) {
+      console.error('Quote API Error:', error)
+      throw error
     }
-
-    // If all proxies fail, throw error (component will use fallback)
-    throw new Error('All quote proxies failed')
   }
 }
 
