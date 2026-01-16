@@ -172,17 +172,17 @@ GitHub Actions führt bei jedem Push/PR automatisch aus:
 ## 🌐 Deployment
 
 Das Frontend ist auf Render.com deployed:
-- **URL:** https://habit-tracker-frontend-4y37.onrender.com
+- **URL:** URL zur Anwendung (z.B. `https://your-app.onrender.com`)
 - **Auto-Deploy:** Bei Push auf main Branch
 
 **Environment Variables auf Render.com:**
-- `VITE_API_URL` = `https://habit-tracker-backend-v21g.onrender.com/api`
+- `VITE_API_URL` = URL zum Backend (z.B. `https://your-backend.onrender.com/api`)
 
 ## 🔗 Backend
 
 Das Frontend kommuniziert mit dem Spring Boot Backend:
 - **Repository:** https://github.com/xyunuss/habit-tracker-backend
-- **API:** https://habit-tracker-backend-v21g.onrender.com/api
+- **API:** URL zur API (z.B. `https://your-backend.onrender.com/api`)
 
 ## 📝 Lizenz
 
