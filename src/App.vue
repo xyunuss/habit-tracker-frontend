@@ -72,6 +72,9 @@
         </div>
 
         <div v-else class="progress-overview">
+          <!-- Motivational Quote -->
+          <QuoteCard class="quote-section" />
+
           <h2 class="section-title">Übersicht</h2>
           <div class="habits-grid">
             <HabitCard
@@ -127,6 +130,7 @@ import HabitCard from './components/HabitCard.vue'
 import HabitDetail from './components/HabitDetail.vue'
 import HabitModal from './components/HabitModal.vue'
 import ConfirmDialog from './components/ConfirmDialog.vue'
+import QuoteCard from './components/QuoteCard.vue'
 
 // State
 const habits = ref([])
@@ -435,6 +439,10 @@ onMounted(() => {
 .progress-view,
 .progress-overview {
   animation: fadeIn var(--transition-base) ease-out;
+}
+
+.quote-section {
+  margin-bottom: var(--space-xl);
 }
 
 .section-title {
